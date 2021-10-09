@@ -1,0 +1,25 @@
+Use this directory for your final game and its module(s).  Only the
+files in this directory will be marked.
+
+Ensure you use the git add command to add your files to the git
+repository.  For example,
+
+git add module.c
+
+Then use the git commit command to add the file contents
+
+git commit -m "Added file" module.c
+
+The use the git push command to copy the changes to the remote git server
+
+git push
+
+
+09/10/21 14:06
+
+Still a work in progress yo may not be super readable yet!
+
+Compile like we did in the labs. Should compile without errors and display the runner and a Stalagtite staticlly
+
+TODO:
+    add effect of stelagtite moving across the screen
