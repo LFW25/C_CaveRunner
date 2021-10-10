@@ -1,4 +1,11 @@
-/*AUTHORS: GEORGE FRASER & LILY WILLIAMS
+/*AUTHORS:
+GEORGE FRASER
+****GEORGE STUDENT ID****
+GHF20@UCLIVE.AC.NZ
+
+LILY WILLIAMS
+42415299
+LFW25@UCLIVE.AC.NZ
 */
 #include "system.h"
 #include "pio.h"
@@ -38,7 +45,7 @@ int main(void)
         pio_config_set(rows[i], PIO_OUTPUT_HIGH);
     }
     bool to_copy = false;    
-    uint8_t obj_to_display[NUM_COLS]; //IF YOU CHECK OJECTS.C AND OBJECTS.H ITS PRETTY CLEAR WHY WE NEED THIS
+    uint8_t obj_to_display[NUM_COLS]; //IF YOU CHECK OBJECTS.C AND OBJECTS.H ITS PRETTY CLEAR WHY WE NEED THIS
 
 
     while (1)
@@ -50,7 +57,7 @@ int main(void)
                 obj_to_display[i] = obstacles[random_number][i];
             }
             to_copy = true;
-        } //COPYS OBJECT TO DIPLAY
+        } //COPIES OBJECT TO DIPLAY
 
         
         if ((counter % OBSTACLE_MOVING_RATE) == 0) {
@@ -66,7 +73,7 @@ int main(void)
             counter = 1;
         }
 
-        display_column(obj_to_display[current_column]|runner[0][current_column], current_column);
+        display_column(obj_to_display[current_column] | runner[0][current_column], current_column);
     
         current_column++;
     
