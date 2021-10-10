@@ -5,6 +5,7 @@
 #include "objects.h"
 #include "pacer.h"
 #include "obstacles.h"
+#include "runner.h"
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -56,8 +57,9 @@ int main(void)
 
         if (counter == UINT16_MAX) {
             counter = 1;
-        } 
-        display_column(obj_to_display[current_column], current_column);
+        }
+
+        display_column(obj_to_display[current_column]|runner[current_column], current_column);
     
         current_column++;
     
