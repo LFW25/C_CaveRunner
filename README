@@ -19,12 +19,12 @@ git push
 
 Still a work in progress so may not be super readable yet! Feel free to call me and i can walk you through it :)
 
-Compile like we did in the labs. Should compile without errors and display the runner and a Stalagtite staticlly
+Compile like we did in the labs. Should compile without errors and display the runner and a Stalagtite statically
 
 TODO:
-    -Add runner funtionality to the game. Header file has already been written but feel free to change it
+    - Add runner functionality to the game. Header file has already been written but feel free to change it
 
-    -Add button funtionality to change the runner
+    - Add button functionality to change the runner
 
     - Add scoring
 
