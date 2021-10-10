@@ -21,7 +21,7 @@ LFW25@UCLIVE.AC.NZ
 #define PACER_RATE 500
 #define NUM_ROWS 7
 #define NUM_COLS 5
-#define NUM_OBSTACLES 3
+#define NUM_OBSTACLES (sizeof(obstacles)/sizeof(obstacles[0]))
 #define OBSTACLE_MOVING_RATE 50
 #define OBSTACLE_REFRESH (OBSTACLE_MOVING_RATE * NUM_ROWS) 
 
@@ -34,7 +34,7 @@ int main(void)
     
     srand(SEED); //STDLIB FUNCTION TO GENERATE PSUEDO RANDOM NUMBERS
 
-    int random_number = rand() % NUM_OBSTACLES; //CONVERTS RANDOM NUMBER TO [0,2] 
+    int random_number = rand() % NUM_OBSTACLES; //CONVERTS RANDOM NUMBER TO [0,NUM_OBSTACLES-1] 
 
     system_init ();
     pacer_init (PACER_RATE); //REFRESH RATE OF 500HZ
@@ -82,7 +82,7 @@ int main(void)
     
         current_column++;
     
-        if (current_column > (LEDMAT_COLS_NUM - 1))
+        if (current_column >= (NUM_COLS))
         {
             current_column = 0;
         }
