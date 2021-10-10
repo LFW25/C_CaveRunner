@@ -11,6 +11,13 @@
 #include <stdlib.h>
 
 #define SEED 2000
+#define PACER_RATE 500
+#define NUM_ROWS 7
+#define NUM_COLS 5
+#define NUM_OBSTACLES 3
+#define OBSTACLE_MOVING_RATE 200
+#define OBSTACLE_REFRESH 1400
+
 
 int main(void)
 {
@@ -19,19 +26,19 @@ int main(void)
     
     srand(SEED); //STDLIB FUNCTION TO GENERATE PSUEDO RANDOM NUMBERS
 
-    int random_number = rand() % 3; //CONVERTS RANDOM NUMBER TO [0,2] 
+    int random_number = rand() % NUM_OBSTACLES; //CONVERTS RANDOM NUMBER TO [0,2] 
 
     system_init ();
-    pacer_init (500); //REFRESH RATE OF 500HZ
+    pacer_init (PACER_RATE); //REFRESH RATE OF 500HZ
     
-    for (uint8_t i = 0; i < 7; i++) {
-        if (i <= 4) {
+    for (uint8_t i = 0; i < NUM_ROWS; i++) {
+        if (i < NUM_COLS) {
             pio_config_set(cols[i], PIO_OUTPUT_HIGH);
         }
         pio_config_set(rows[i], PIO_OUTPUT_HIGH);
     }
     bool to_copy = false;    
-    uint8_t obj_to_display[5]; //IF YOU CHECK OJECTS.C AND OBJECTS.H ITS PRETTY CLEAR WHY WE NEED THIS
+    uint8_t obj_to_display[NUM_COLS]; //IF YOU CHECK OJECTS.C AND OBJECTS.H ITS PRETTY CLEAR WHY WE NEED THIS
 
 
     while (1)
@@ -39,18 +46,18 @@ int main(void)
         pacer_wait ();
 
         if (!to_copy) {
-            for (uint8_t i = 0; i < 5; i++) {
+            for (uint8_t i = 0; i < NUM_COLS; i++) {
                 obj_to_display[i] = obstacles[random_number][i];
             }
             to_copy = true;
         } //COPYS OBJECT TO DIPLAY
 
         
-        if ((counter % 200) == 0) {
+        if ((counter % OBSTACLE_MOVING_RATE) == 0) {
             move_object_left(obj_to_display);
         } //WILL MOVE THE OBJECT LEFT AT APPROX 2.5HZ
 
-        if ((counter % 1400) == 0) {
+        if ((counter % OBSTACLE_REFRESH) == 0) {
             random_number = rand() % 3;
             to_copy = false;
         } //WHEN OBJECT IS OFF THE SCREEN, DISPLAY A NEW OBJECT

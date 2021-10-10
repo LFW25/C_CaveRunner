@@ -7,6 +7,9 @@ Displays the runner and the obstacles on the matrix display
 #include "pio.h"
 #include "objects.h"
 
+#define NUM_ROWS 7
+#define NUM_COLS 5
+
 void display_column(uint8_t row_pattern, uint8_t current_column)
 {
     pio_output_high(cols[previous]);
@@ -14,7 +17,7 @@ void display_column(uint8_t row_pattern, uint8_t current_column)
     previous = current_column;
     
 
-    for (uint8_t i = 0; i < 7; i++) {
+    for (uint8_t i = 0; i < NUM_ROWS; i++) {
         if ((row_pattern >> i) & 1) {
             pio_output_low(rows[i]);
         } else {
@@ -27,7 +30,7 @@ void display_column(uint8_t row_pattern, uint8_t current_column)
 //THIS FUNCTION LEFT SHIFTS THE OBSTACLE BITMAP
 void move_object_left(uint8_t* obstacle)
 {
-    for (uint8_t i = 0; i < 5; i++) {
+    for (uint8_t i = 0; i < NUM_COLS; i++) {
         obstacle[i] = obstacle[i] << 1;
     }
 }
