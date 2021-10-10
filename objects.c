@@ -1,4 +1,11 @@
-/*Authors: George Fraser & Lily Williams
+/*AUTHORS:
+GEORGE FRASER
+****GEORGE STUDENT ID****
+GHF20@UCLIVE.AC.NZ
+
+LILY WILLIAMS
+42415299
+LFW25@UCLIVE.AC.NZ
 
 Purpose of File:
 Displays the runner and the obstacles on the matrix display 
