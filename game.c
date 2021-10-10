@@ -59,7 +59,7 @@ int main(void)
             counter = 1;
         }
 
-        display_column(obj_to_display[current_column]|runner[current_column], current_column);
+        display_column(obj_to_display[current_column]|runner[0][current_column], current_column);
     
         current_column++;
     
