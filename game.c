@@ -1,6 +1,6 @@
 /*AUTHORS:
 GEORGE FRASER
-****GEORGE STUDENT ID****
+54510750
 GHF20@UCLIVE.AC.NZ
 
 LILY WILLIAMS
@@ -22,14 +22,15 @@ LFW25@UCLIVE.AC.NZ
 #define NUM_ROWS 7
 #define NUM_COLS 5
 #define NUM_OBSTACLES 3
-#define OBSTACLE_MOVING_RATE 200
-#define OBSTACLE_REFRESH 1400
+#define OBSTACLE_MOVING_RATE 50
+#define OBSTACLE_REFRESH (OBSTACLE_MOVING_RATE * NUM_ROWS) 
 
 
 int main(void)
 {
     uint8_t current_column = 0;
     uint16_t counter = 1;
+    uint8_t score = 0; //overflow will happen after about 4 minutes
     
     srand(SEED); //STDLIB FUNCTION TO GENERATE PSUEDO RANDOM NUMBERS
 
@@ -52,6 +53,10 @@ int main(void)
     {
         pacer_wait ();
 
+        if (counter % PACER_RATE == 0) {
+            score++;
+        } //increments score every second
+
         if (!to_copy) {
             for (uint8_t i = 0; i < NUM_COLS; i++) {
                 obj_to_display[i] = obstacles[random_number][i];
@@ -65,7 +70,7 @@ int main(void)
         } //WILL MOVE THE OBJECT LEFT AT APPROX 2.5HZ
 
         if ((counter % OBSTACLE_REFRESH) == 0) {
-            random_number = rand() % 3;
+            random_number = rand() % NUM_OBSTACLES;
             to_copy = false;
         } //WHEN OBJECT IS OFF THE SCREEN, DISPLAY A NEW OBJECT
 
