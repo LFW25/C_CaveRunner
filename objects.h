@@ -23,14 +23,8 @@ static const pio_t cols[] =
     LEDMAT_COL4_PIO, LEDMAT_COL5_PIO
 };
 
-
-static const uint8_t bitmap[] =
-{
-    0x04, 0x04, 0x04, 0x24, 0x20
-     
-}; //This Bit map is specific tot the runner and the stalagtite
-
-
 void display_column(uint8_t row_pattern, uint8_t current_column);
+
+void move_object_left(uint8_t* obstacle);
 
 #endif //OBJECTS_H

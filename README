@@ -17,9 +17,17 @@ git push
 
 09/10/21 14:06
 
-Still a work in progress yo may not be super readable yet!
+Still a work in progress so may not be super readable yet! Feel free to call me and i can walk you through it :)
 
 Compile like we did in the labs. Should compile without errors and display the runner and a Stalagtite staticlly
 
 TODO:
-    add effect of stelagtite moving across the screen
+    -Add runner funtionality to the game. Header file has already been written but feel free to change it
+
+    -Add button funtionality to change the runner
+
+    - Add scoring
+
+    - Object collision detection
+
+    - pausing 
