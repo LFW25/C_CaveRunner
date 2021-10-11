@@ -19,6 +19,7 @@ LFW25@UCLIVE.AC.NZ
 #include "pacer.h"
 #include "obstacles.h"
 #include "runner.h"
+#include "tinygl.h"
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -28,8 +29,9 @@ LFW25@UCLIVE.AC.NZ
 #define NUM_ROWS 7
 #define NUM_COLS 5
 #define NUM_OBSTACLES (sizeof(obstacles)/sizeof(obstacles[0]))
-#define OBSTACLE_MOVING_RATE 50
-#define OBSTACLE_REFRESH (OBSTACLE_MOVING_RATE * NUM_ROWS) 
+#define OBSTACLE_MOVING_RATE 75
+#define OBSTACLE_REFRESH (OBSTACLE_MOVING_RATE * NUM_ROWS)
+#define TIMEOUT_TIME (OBSTACLE_MOVING_RATE * 4) 
 
 
 int main(void)
@@ -45,6 +47,10 @@ int main(void)
     system_init ();
     pacer_init (PACER_RATE); //REFRESH RATE OF 500HZ
     button_init ();
+    tinygl_init (DISPLAY_TASK_RATE);
+    tinygl_font_set (&font3x5_1);
+    tinygl_text_mode_set (TINYGL_TEXT_MODE_STEP);
+    tinygl_text_dir_set (TINYGL_TEXT_DIR_ROTATE);
     
     for (uint8_t i = 0; i < NUM_ROWS; i++) {
         if (i < NUM_COLS) {
@@ -52,14 +58,17 @@ int main(void)
         }
         pio_config_set(rows[i], PIO_OUTPUT_HIGH);
     }
-    bool to_copy = false;    
+    bool to_copy = false;
     uint8_t obj_to_display[NUM_COLS]; //IF YOU CHECK OBJECTS.C AND OBJECTS.H ITS PRETTY CLEAR WHY WE NEED THIS
-
+    uint8_t runner_status = 1;
+    bool timeout = false;
+    uint16_t timeout_counter = 0;
 
     while (1)
     {
         pacer_wait ();
         navswitch_update(); // POLL THE NAVSWITCH
+        button_update();
 
         if (counter % PACER_RATE == 0) {
             score++;
@@ -82,21 +91,39 @@ int main(void)
             to_copy = false;
         } //WHEN OBJECT IS OFF THE SCREEN, DISPLAY A NEW OBJECT
 
-        if (counter == UINT16_MAX) {
-            counter = 1;
-        }
+        if (navswitch_push_event_p(NAVSWITCH_SOUTH)) {
+            while(1) {
+                navswitch_update();
+                if (navswitch_push_event_p(NAVSWITCH_NORTH)) {
+                    break;
+                }
+            }
+        } //PAUSES THE GAME WHEN PRESSING THE NAVSWITCH LEFT, RESUME WHEN PUSHING RIGHT
+        
 
         //DETERMINE RUNNER STATUS
-        static uint8_t runner_status = 0;
 
-        if (navswitch_push_event_p (NAVSWITCH_NORTH)) { // NAV NORTH = JUMP
-            runner_status = 2;
-        } else if (navswitch_push_event_p (NAVSWITCH_SOUTH)) { // NAV SOUTH - CROUCH
-            runner_status = 1;
-        } else if (button_pressed_p) { // BUTTON PRESS = DOUBLE JUMP
-            runner_status = 3;
-        } else { // DEFAULT
-            runner_status = 0;
+        if (timeout == false) {
+
+            if (navswitch_push_event_p (NAVSWITCH_WEST)) { // NAV NORTH = JUMP
+                runner_status = 2;
+                timeout = true;
+            } else if (navswitch_push_event_p (NAVSWITCH_EAST)) { // NAV SOUTH - CROUCH
+                runner_status = 1;
+                timeout = true;
+            } else if (button_push_event_p (0)) { // BUTTON PRESS = DOUBLE JUMP
+                runner_status = 3;
+                timeout = true;
+            } else { // DEFAULT
+                runner_status = 0;
+            }
+        } else {
+            if (timeout_counter >= TIMEOUT_TIME) {
+                timeout = false;
+                timeout_counter = 0;
+            } else {
+                timeout_counter++;
+            }
         }
 
         display_column(obj_to_display[current_column] | runner[runner_status][current_column], current_column);
@@ -107,6 +134,11 @@ int main(void)
         {
             current_column = 0;
         }
-        counter++;           
+        
+        counter++;
+
+        if (counter == UINT16_MAX) {
+            counter = 1;
+        }           
     }
 }
