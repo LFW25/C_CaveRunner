@@ -1,3 +1,29 @@
+***********
+CAVE RUNNER
+***********
+Welcome to Cave Runner, where you are a little man running through a cave.
+As you run you must dodge various obstacles!
+- Stalagtites will hang from the ceiling, requiring you to crouch underneath to avoid smacking your head!
+- Bats will fly at your head, requiring you to crouch or doublejump to avoid colliding!
+- Rocks will deviously trip you up, try jumping over them!
+- Boulders will prevent you from continuing your caving dreams, you'll have to doublejump to get past!
+
+If you collide with any obstacles, that's game over! The game will end and you will see your score.
+
+This game is played in landscape mode to give you the glory of more reaction time.
+The USB connector is on the right-hand side.
+
+CONTROLS:
+Crouch - Down on the navswitch
+Jump - Up on the navswitch
+Doublejump - Press the button (not the reset button!)
+
+
+
+
+
+
+
 Use this directory for your final game and its module(s).  Only the
 files in this directory will be marked.
 
@@ -15,15 +41,9 @@ The use the git push command to copy the changes to the remote git server
 git push
 
 
-09/10/21 14:06
-
-Still a work in progress so may not be super readable yet! Feel free to call me and i can walk you through it :)
-
-Compile like we did in the labs. Should compile without errors and display the runner and a Stalagtite statically
+10/10/21 13:37
 
 TODO:
-    - Add runner functionality to the game. Header file has already been written but feel free to change it
-
     - Add button functionality to change the runner
 
     - Add scoring
