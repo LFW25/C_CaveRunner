@@ -57,6 +57,7 @@ int main(void)
     while (1)
     {
         pacer_wait ();
+        navswitch_update(); // POLL THE NAVSWITCH
 
         if (counter % PACER_RATE == 0) {
             score++;
@@ -81,6 +82,17 @@ int main(void)
 
         if (counter == UINT16_MAX) {
             counter = 1;
+        }
+
+        //DETERMINE RUNNER STATUS
+        static uint8_t runner_status = 0;
+
+        if (navswitch_push_event_p (NAVSWITCH_NORTH)) { // NAV NORTH = JUMP
+            runner_status = 2;
+        } else if (navswitch_push_event_p (NAVSWITCH_SOUTH)) { // NAV SOUTH - CROUCH
+            runner_status = 1;
+        } else { // DEFAULT
+            runner_status = 0;
         }
 
         display_column(obj_to_display[current_column] | runner[0][current_column], current_column);
