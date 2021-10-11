@@ -44,10 +44,8 @@ git push
 10/10/21 13:37
 
 TODO:
-    - Add button functionality to change the runner
-
     - Add scoring
 
     - Object collision detection
 
-    - pausing 
+    - pausing (display score when paused?)

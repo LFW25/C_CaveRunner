@@ -19,7 +19,6 @@ LFW25@UCLIVE.AC.NZ
 #include "pacer.h"
 #include "obstacles.h"
 #include "runner.h"
-#include "tinygl.h"
 
 #include <stdint.h>
 #include <stdlib.h>
