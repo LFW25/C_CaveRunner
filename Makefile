@@ -37,16 +37,21 @@ tinygl.o: ../../utils/tinygl.c ../../drivers/avr/system.h ../../drivers/display.
 uint8toa.o: ../../utils/uint8toa.c ../../drivers/avr/system.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-
-#timer.o must be included to compile without error. see past labs
 timer.o: ../../drivers/avr/timer.c ../../drivers/avr/system.h ../../drivers/avr/timer.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 pacer.o: ../../utils/pacer.c ../../drivers/avr/system.h ../../drivers/avr/timer.h ../../utils/pacer.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
+collision.o: collision.c collision.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+counter.o: counter.c counter.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+
 # Link: create ELF output file from object files.
-game.out: game.o system.o pio.o objects.o navswitch.o tinygl.o uint8toa.o timer.o pacer.o
+game.out: game.o system.o pio.o objects.o navswitch.o tinygl.o uint8toa.o timer.o pacer.o collision.o counter.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 

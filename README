@@ -44,11 +44,13 @@ The use the git push command to copy the changes to the remote git server
 git push
 
 
-11/10/21 22:36
+12/10/21 12:34
 
 TODO:
     - Add scoring
 
-    - Object collision detection
-
     - Add score display functionality to pause screen
+
+    - Split down into modules
+
+    - Get program to compile with tinygt, fonts and uintoa 

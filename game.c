@@ -21,6 +21,8 @@ LFW25@UCLIVE.AC.NZ
 #include "tinygl.h"
 #include "../fonts/font5x7_1.h"
 #include "uint8toa.h"
+#include "collision.h"
+#include "counter.h"
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -33,7 +35,7 @@ LFW25@UCLIVE.AC.NZ
 #define NUM_OBSTACLES (sizeof(obstacles)/sizeof(obstacles[0]))
 #define OBSTACLE_MOVING_RATE 150
 #define OBSTACLE_REFRESH (OBSTACLE_MOVING_RATE * NUM_ROWS)
-#define TIMEOUT_TIME (OBSTACLE_MOVING_RATE * 4) 
+#define TIMEOUT_TIME (OBSTACLE_MOVING_RATE * 4)
 
 void display_character (uint8_t score)
 {
@@ -47,7 +49,7 @@ void display_character (uint8_t score)
 int main(void)
 {
     uint8_t current_column = 0;
-    uint16_t counter = 1;
+    //uint16_t counter = 1;
     uint8_t score = 0; // OVERFLOW IN 4 MINUTES (MAX SCORE 240) 
     
     srand(SEED); //STDLIB FUNCTION TO GENERATE PSUEDO RANDOM NUMBERS
@@ -56,6 +58,7 @@ int main(void)
 
     system_init ();
     pacer_init (PACER_RATE); //REFRESH RATE OF 500HZ
+    counter_init();
     
     for (uint8_t i = 0; i < NUM_ROWS; i++) {
         if (i < NUM_COLS) {
@@ -68,9 +71,9 @@ int main(void)
     static bool pause_flag = 0;
 
     uint8_t obj_to_display[NUM_COLS]; //IF YOU CHECK OBJECTS.C AND OBJECTS.H ITS PRETTY CLEAR WHY WE NEED THIS
-    uint8_t runner_status = 1;
     uint16_t timeout_counter = 0;
-    static uint8_t runner_status = 0;
+    static uint8_t runner_status;
+    static uint16_t obstacle_check = OBSTACLE_REFRESH-OBSTACLE_MOVING_RATE;
 
 
     while (1)
@@ -147,6 +150,12 @@ int main(void)
             }
         }
 
+        if (counter == obstacle_check) {
+            if (collision_check(runner_status, random_number)) {
+                break;
+            }
+        } //Collision detection. Will break while loop but needs to display soimething instead?
+
         display_column(obj_to_display[current_column] | runner[runner_status][current_column], current_column);
     
         current_column++;
@@ -156,10 +165,12 @@ int main(void)
             current_column = 0;
         }
         
-        counter++;
+        counter_increment();
+        /*counter++;
 
         if (counter == UINT16_MAX) {
             counter = 1;
-        }           
+        }
+        */           
     }
 }
