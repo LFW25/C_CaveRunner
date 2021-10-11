@@ -19,6 +19,7 @@ LFW25@UCLIVE.AC.NZ
 #include "obstacles.h"
 #include "runner.h"
 
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
 
@@ -82,12 +83,13 @@ int main(void)
             random_number = rand() % NUM_OBSTACLES;
             to_copy = false;
         } //WHEN OBJECT IS OFF THE SCREEN, DISPLAY A NEW OBJECT
-
-        if (navswitch_push_event_p(NAVSWITCH_EAST)) {
-            while(1) {
+        static bool pause_flag = 0;
+        if (navswitch_push_event_p(NAVSWITCH_SOUTH)) {
+            pause_flag = 1;
+            while(pause_flag == 1) {
                 navswitch_update();
-                if (navswitch_push_event_p(NAVSWITCH_WEST)) {
-                    break;
+                if (navswitch_push_event_p(NAVSWITCH_NORTH)) {
+                    pause_flag = 0;
                 }
             }
         } //PAUSES THE GAME WHEN PRESSING THE NAVSWITCH LEFT, RESUME WHEN PUSHING RIGHT
