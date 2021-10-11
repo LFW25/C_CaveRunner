@@ -18,6 +18,9 @@ LFW25@UCLIVE.AC.NZ
 #include "pacer.h"
 #include "obstacles.h"
 #include "runner.h"
+#include "tinygl.h"
+#include "../fonts/font5x7_1.h"
+#include "uint8toa.h"
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -32,12 +35,20 @@ LFW25@UCLIVE.AC.NZ
 #define OBSTACLE_REFRESH (OBSTACLE_MOVING_RATE * NUM_ROWS)
 #define TIMEOUT_TIME (OBSTACLE_MOVING_RATE * 4) 
 
+void display_character (uint8_t score)
+{
+    char display_score[4];
+    
+    uint8toa(score, &display_score, true);
+    tinygl_text (display_score);
+}
+
 
 int main(void)
 {
     uint8_t current_column = 0;
     uint16_t counter = 1;
-    uint8_t score = 0; //overflow will happen after about 4 minutes
+    uint8_t score = 0; // OVERFLOW IN 4 MINUTES (MAX SCORE 240) 
     
     srand(SEED); //STDLIB FUNCTION TO GENERATE PSUEDO RANDOM NUMBERS
 
@@ -53,19 +64,25 @@ int main(void)
         pio_config_set(rows[i], PIO_OUTPUT_HIGH);
     }
     bool to_copy = false;
+    bool timeout = false;
+    static bool pause_flag = 0;
+
     uint8_t obj_to_display[NUM_COLS]; //IF YOU CHECK OBJECTS.C AND OBJECTS.H ITS PRETTY CLEAR WHY WE NEED THIS
     uint8_t runner_status = 1;
-    bool timeout = false;
     uint16_t timeout_counter = 0;
+    static uint8_t runner_status = 0;
+
 
     while (1)
     {
         pacer_wait ();
         navswitch_update(); // POLL THE NAVSWITCH
+        tinygl_init (PACER_RATE); // SETUP FOR SCORE DISPLAY
+        tinygl_font_set (&font5x7_1);
 
         if (counter % PACER_RATE == 0) {
             score++;
-        } //increments score every second
+        } // INCREMENTS SCORE EVERY SECOND
 
         if (to_copy == false) {
             for (uint8_t i = 0; i < NUM_COLS; i++) {
@@ -84,16 +101,24 @@ int main(void)
             to_copy = false;
         } //WHEN OBJECT IS OFF THE SCREEN, DISPLAY A NEW OBJECT
 
-        static bool pause_flag = 0;
+
         if (navswitch_push_event_p(NAVSWITCH_SOUTH)) {
+
             pause_flag = 1;
-            uint8_t previous_display = {obj_to_display[current_column] | runner[runner_status][current_column], current_column};
+            uint8_t previous_display = {obj_to_display[current_column] | runner[runner_status][current_column], current_column}; // SAVES THE PREVIOUS DISPLAY IN CASE OF OVERWRITE
             while(pause_flag == 1) {
+
+                // DISPLAY PAUSE
                 display_column(0x50, 0);
                 display_column(0x50, 1);
                 display_column(0x50, 2);
                 navswitch_update();
+
+                tinygl_update ();
+                display_character(score);
+                
                 if (navswitch_push_event_p(NAVSWITCH_NORTH)) {
+                    // GAME IS RESUMED, DISPLAY OBJECTS AGAIN
                     pause_flag = 0;
                     display_column(obj_to_display[current_column] | runner[runner_status][current_column], current_column);
                 }
@@ -102,7 +127,6 @@ int main(void)
         
 
         //DETERMINE RUNNER STATUS
-        static uint8_t runner_status = 0;
         if (timeout == false) {
 
             if (navswitch_down_p (NAVSWITCH_WEST)) { // NAV WEST = JUMP
