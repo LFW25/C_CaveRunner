@@ -18,9 +18,14 @@ uint8_t rock[] =
     0x00, 0x00, 0x00, 0x00, 0x01
 };
 
+uint8_t boulder[] =
+{
+    0x00, 0x00, 0x00, 0x03, 0x03
+};
+
 uint8_t* obstacles[] = 
 {
-    stalagtite, rock, bird
+    stalagtite, rock, bird, boulder
 };
 
 #endif
