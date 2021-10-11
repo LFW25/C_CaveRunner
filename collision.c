@@ -1,3 +1,17 @@
+/*
+@ FILE: COLLISION.C
+@ AUTHORS:
+GEORGE FRASER
+54510750
+GHF20@UCLIVE.AC.NZ
+
+LILY WILLIAMS
+42415299
+LFW25@UCLIVE.AC.NZ
+@ DATE: 12 OCTOBER 2021
+@ BRIEF: Checks if there has been a collision in the game
+*/
+
 #include "collision.h"
 
 #include <stdint.h>
@@ -33,7 +47,7 @@ bool collision_check(uint8_t runner_state, uint8_t obstacle)
                 return true;
             }
             break;
-        default:
+        default: //will only get here if we add an object without adding a case
             break;  
     }
     return false;

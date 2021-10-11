@@ -150,10 +150,11 @@ int main(void)
             }
         }
 
-        if (counter == obstacle_check) {
+        if (counter % obstacle_check == 0) {
             if (collision_check(runner_status, random_number)) {
                 break;
             }
+            obstacle_check = OBSTACLE_REFRESH+OBSTACLE_MOVING_RATE 
         } //Collision detection. Will break while loop but needs to display soimething instead?
 
         display_column(obj_to_display[current_column] | runner[runner_status][current_column], current_column);
