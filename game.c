@@ -44,7 +44,6 @@ int main(void)
 
     system_init ();
     pacer_init (PACER_RATE); //REFRESH RATE OF 500HZ
-    button_init ();
     
     for (uint8_t i = 0; i < NUM_ROWS; i++) {
         if (i < NUM_COLS) {
@@ -62,7 +61,6 @@ int main(void)
     {
         pacer_wait ();
         navswitch_update(); // POLL THE NAVSWITCH
-        button_update();
 
         if (counter % PACER_RATE == 0) {
             score++;
