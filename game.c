@@ -14,7 +14,6 @@ LFW25@UCLIVE.AC.NZ
 #include "system.h"
 #include "pio.h"
 #include "navswitch.h"
-#include "button.h"
 #include "objects.h"
 #include "pacer.h"
 #include "obstacles.h"
@@ -97,18 +96,15 @@ int main(void)
         
 
         //DETERMINE RUNNER STATUS
-
+        static uint8_t runner_status = 0;
         if (timeout == false) {
 
-            if (navswitch_push_event_p (NAVSWITCH_WEST)) { // NAV NORTH = JUMP
+            if (navswitch_down_p (NAVSWITCH_WEST)) { // NAV WEST = JUMP
                 runner_status = 2;
-                timeout = true;
-            } else if (navswitch_push_event_p (NAVSWITCH_EAST)) { // NAV SOUTH - CROUCH
+            } else if (navswitch_down_p (NAVSWITCH_EAST)) { // NAV EAST = CROUCH
                 runner_status = 1;
-                timeout = true;
-            } else if (button_push_event_p (0)) { // BUTTON PRESS = DOUBLE JUMP
+            } else if (navswitch_down_p (NAVSWITCH_PUSH)) { // BUTTON PRESS = DOUBLE JUMP
                 runner_status = 3;
-                timeout = true;
             } else { // DEFAULT
                 runner_status = 0;
             }
