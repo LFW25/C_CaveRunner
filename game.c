@@ -9,6 +9,7 @@ LFW25@UCLIVE.AC.NZ
 */
 #include "system.h"
 #include "pio.h"
+#include "navswitch.h"
 #include "objects.h"
 #include "pacer.h"
 #include "obstacles.h"
