@@ -4,19 +4,22 @@ CAVE RUNNER
 Welcome to Cave Runner, where you are a little man running through a cave.
 As you run you must dodge various obstacles!
 - Stalagtites will hang from the ceiling, requiring you to crouch underneath to avoid smacking your head!
-- Bats will fly at your head, requiring you to crouch or doublejump to avoid colliding!
-- Rocks will deviously trip you up, try jumping over them!
-- Boulders will prevent you from continuing your caving dreams, you'll have to doublejump to get past!
+- Bats will fly at your head, requiring you to crouch or doublejump to avoid colliding.
+- Rocks will deviously trip you up, try jumping over them.
+- Boulders will prevent you from continuing your caving dreams, you'll have to doublejump to get past.
+- Tunnels will force you to squeeze through the middle, and only a jump will work.
 
 If you collide with any obstacles, that's game over! The game will end and you will see your score.
 
-This game is played in landscape mode to give you the glory of more reaction time.
+This game is played in landscape mode to give you the advantage of more reaction time.
 The USB connector is on the right-hand side.
 
 CONTROLS:
 Crouch - Down on the navswitch
 Jump - Up on the navswitch
 Doublejump - Press the navswitch
+Pause - Left on the navswitch
+Resume - Right on the navswitch
 
 
 
