@@ -14,6 +14,7 @@ LFW25@UCLIVE.AC.NZ
 #include "system.h"
 #include "pio.h"
 #include "navswitch.h"
+#include "button.h"
 #include "objects.h"
 #include "pacer.h"
 #include "obstacles.h"
@@ -43,6 +44,7 @@ int main(void)
 
     system_init ();
     pacer_init (PACER_RATE); //REFRESH RATE OF 500HZ
+    button_init ();
     
     for (uint8_t i = 0; i < NUM_ROWS; i++) {
         if (i < NUM_COLS) {
@@ -91,11 +93,13 @@ int main(void)
             runner_status = 2;
         } else if (navswitch_push_event_p (NAVSWITCH_SOUTH)) { // NAV SOUTH - CROUCH
             runner_status = 1;
+        } else if (button_pressed_p) { // BUTTON PRESS = DOUBLE JUMP
+            runner_status = 3;
         } else { // DEFAULT
             runner_status = 0;
         }
 
-        display_column(obj_to_display[current_column] | runner[0][current_column], current_column);
+        display_column(obj_to_display[current_column] | runner[runner_status][current_column], current_column);
     
         current_column++;
     
