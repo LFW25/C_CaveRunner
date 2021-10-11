@@ -27,7 +27,7 @@ LFW25@UCLIVE.AC.NZ
 #define NUM_ROWS 7
 #define NUM_COLS 5
 #define NUM_OBSTACLES (sizeof(obstacles)/sizeof(obstacles[0]))
-#define OBSTACLE_MOVING_RATE 75
+#define OBSTACLE_MOVING_RATE 150
 #define OBSTACLE_REFRESH (OBSTACLE_MOVING_RATE * NUM_ROWS)
 #define TIMEOUT_TIME (OBSTACLE_MOVING_RATE * 4) 
 
@@ -83,10 +83,10 @@ int main(void)
             to_copy = false;
         } //WHEN OBJECT IS OFF THE SCREEN, DISPLAY A NEW OBJECT
 
-        if (navswitch_push_event_p(NAVSWITCH_SOUTH)) {
+        if (navswitch_push_event_p(NAVSWITCH_EAST)) {
             while(1) {
                 navswitch_update();
-                if (navswitch_push_event_p(NAVSWITCH_NORTH)) {
+                if (navswitch_push_event_p(NAVSWITCH_WEST)) {
                     break;
                 }
             }
