@@ -47,10 +47,6 @@ int main(void)
     system_init ();
     pacer_init (PACER_RATE); //REFRESH RATE OF 500HZ
     button_init ();
-    tinygl_init (DISPLAY_TASK_RATE);
-    tinygl_font_set (&font3x5_1);
-    tinygl_text_mode_set (TINYGL_TEXT_MODE_STEP);
-    tinygl_text_dir_set (TINYGL_TEXT_DIR_ROTATE);
     
     for (uint8_t i = 0; i < NUM_ROWS; i++) {
         if (i < NUM_COLS) {
