@@ -67,12 +67,12 @@ int main(void)
             score++;
         } //increments score every second
 
-        if (!to_copy) {
+        if (to_copy == false) {
             for (uint8_t i = 0; i < NUM_COLS; i++) {
                 obj_to_display[i] = obstacles[random_number][i];
             }
             to_copy = true;
-        } //COPIES OBJECT TO DIPLAY
+        } //COPIES OBJECT TO DISPLAY
 
         
         if ((counter % OBSTACLE_MOVING_RATE) == 0) {
@@ -83,13 +83,19 @@ int main(void)
             random_number = rand() % NUM_OBSTACLES;
             to_copy = false;
         } //WHEN OBJECT IS OFF THE SCREEN, DISPLAY A NEW OBJECT
+
         static bool pause_flag = 0;
         if (navswitch_push_event_p(NAVSWITCH_SOUTH)) {
             pause_flag = 1;
+            uint8_t previous_display = {obj_to_display[current_column] | runner[runner_status][current_column], current_column};
             while(pause_flag == 1) {
+                display_column(0x50, 0);
+                display_column(0x50, 1);
+                display_column(0x50, 2);
                 navswitch_update();
                 if (navswitch_push_event_p(NAVSWITCH_NORTH)) {
                     pause_flag = 0;
+                    display_column(obj_to_display[current_column] | runner[runner_status][current_column], current_column);
                 }
             }
         } //PAUSES THE GAME WHEN PRESSING THE NAVSWITCH LEFT, RESUME WHEN PUSHING RIGHT
