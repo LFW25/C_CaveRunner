@@ -34,6 +34,9 @@ navswitch.o: ../../drivers/navswitch.c ../../drivers/navswitch.h ../../drivers/a
 tinygl.o: ../../utils/tinygl.c ../../drivers/avr/system.h ../../drivers/display.h ../../utils/font.h ../../utils/tinygl.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
+uint8toa.o: ../../utils/uint8toa.c ../../drivers/avr/system.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
 
 #timer.o must be included to compile without error. see past labs
 timer.o: ../../drivers/avr/timer.c ../../drivers/avr/system.h ../../drivers/avr/timer.h
@@ -43,7 +46,7 @@ pacer.o: ../../utils/pacer.c ../../drivers/avr/system.h ../../drivers/avr/timer.
 	$(CC) -c $(CFLAGS) $< -o $@
 
 # Link: create ELF output file from object files.
-game.out: game.o system.o pio.o objects.o navswitch.o tinygl.o timer.o pacer.o
+game.out: game.o system.o pio.o objects.o navswitch.o tinygl.o uint8toa.o timer.o pacer.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 
