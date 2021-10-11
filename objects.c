@@ -1,4 +1,6 @@
-/*AUTHORS:
+/*
+@ FILE: GAME.C
+@ AUTHORS:
 GEORGE FRASER
 54510750
 GHF20@UCLIVE.AC.NZ
@@ -6,9 +8,8 @@ GHF20@UCLIVE.AC.NZ
 LILY WILLIAMS
 42415299
 LFW25@UCLIVE.AC.NZ
-
-Purpose of File:
-Displays the runner and the obstacles on the matrix display 
+@ DATE: 11 OCTOBER 2021
+@ BRIEF: DISPLAYS THE OBSTACLES AND THE RUNNER ON THE SCREEN
 */
 #include "system.h"
 #include "pio.h"
