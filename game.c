@@ -13,14 +13,15 @@ lfw25@uclive.ac.nz
 */
 #include "system.h"
 #include "pio.h"
+#include "tinygl.h"
+#include "../../fonts/font5x7_1.h"
+#include "uint8toa.h"
+
 #include "navswitch.h"
 #include "objects.h"
 #include "pacer.h"
 #include "obstacles.h"
 #include "runner.h"
-#include "tinygl.h"
-#include "../fonts/font5x7_1.h"
-#include "uint8toa.h"
 #include "collision.h"
 #include "counter.h"
 
