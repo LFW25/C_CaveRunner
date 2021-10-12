@@ -1,15 +1,15 @@
 /*
-@ FILE: COUNTER.H
-@ AUTHORS:
-GEORGE FRASER
+@ File: Counter.h
+@ Authors:
+George Fraser
 54510750
-GHF20@UCLIVE.AC.NZ
+ghf20@uclive.ac.nz
 
-LILY WILLIAMS
+Lily Williams
 42415299
-LFW25@UCLIVE.AC.NZ
-@ DATE: 12 OCTOBER 2021
-@ BRIEF: Initialises a loop counter for the game
+lfw25@uclive.ac.nz
+@ Date: 12 October 2021
+@ Brief: Keeps track of the loop count in the game
 */
 
 #ifndef COUNTER_H
