@@ -1,5 +1,5 @@
 /*
-@ File: Game.c
+@ File: Collision.c
 @ Authors:
 George Fraser
 54510750

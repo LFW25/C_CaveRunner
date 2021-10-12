@@ -1,15 +1,15 @@
 /*
-@ FILE: COLLISION.H
-@ AUTHORS:
-GEORGE FRASER
+@ File: Collision.h
+@ Authors:
+George Fraser
 54510750
-GHF20@UCLIVE.AC.NZ
+ghf20@uclive.ac.nz
 
-LILY WILLIAMS
+Lily Williams
 42415299
-LFW25@UCLIVE.AC.NZ
-@ DATE: 12 OCTOBER 2021
-@ BRIEF: Initialises collision detection in the game
+lfw25@uclive.ac.nz
+@ Date: 12 October 2021
+@ Brief: Checks for collisions between runner and obstacles
 */
 
 #ifndef COLLISION_H
