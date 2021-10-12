@@ -1,15 +1,15 @@
 /*
-@ FILE: COUNTER.C
-@ AUTHORS:
-GEORGE FRASER
+@ File: Game.c
+@ Authors:
+George Fraser
 54510750
-GHF20@UCLIVE.AC.NZ
+ghf20@uclive.ac.nz
 
-LILY WILLIAMS
+Lily Williams
 42415299
-LFW25@UCLIVE.AC.NZ
-@ DATE: 12 OCTOBER 2021
-@ BRIEF: Keeps track of the loop count in the game
+lfw25@uclive.ac.nz
+@ Date: 12 October 2021
+@ Brief: Keeps track of the loop count in the game
 */
 
 #include "counter.h"
@@ -22,7 +22,7 @@ void counter_init(void)
     counter = 1;
 }
 
-//Avoids uint16 overflow
+//Avoids uint16_t overflow
 static void counter_check_max(void)
 {
     if (counter == UINT16_MAX) {
