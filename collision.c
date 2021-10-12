@@ -24,31 +24,31 @@ bool collision_check(uint8_t runner_state, uint8_t obstacle)
     switch(obstacle) {
         case 0: //Stalagtite = crouch
             if (runner_state == 1) {
-                return true;
+                return false;
             }
             break;
         case 1: //Rock = jump || super jump
             if (runner_state == 2 || runner_state == 3) {
-                return true;
+                return false;
             }
             break;
         case 2: //Bat = crouch || 
             if (runner_state == 1 || runner_state == 3) {
-                return true;
+                return false;
             }
             break;
         case 3: //Boulder = super jump
             if (runner_state == 3) {
-                return true;
+                return false;
             }
             break;
         case 4: //Tunnel = jump
             if (runner_state == 2) {
-                return true;
+                return false;
             }
             break;
         default: //Will only get here if we add an object without adding a case
             break;  
     }
-    return false;
+    return true;
 }
