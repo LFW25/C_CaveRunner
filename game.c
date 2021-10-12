@@ -1,15 +1,15 @@
 /*
-@ FILE: GAME.C
-@ AUTHORS:
-GEORGE FRASER
+@ File: Game.c
+@ Authors:
+George Fraser
 54510750
-GHF20@UCLIVE.AC.NZ
+ghf20@uclive.ac.nz
 
-LILY WILLIAMS
+Lily Williams
 42415299
-LFW25@UCLIVE.AC.NZ
-@ DATE: 11 OCTOBER 2021
-@ BRIEF: COMBINES AND INITIALISES THE GAME FILES
+lfw25@uclive.ac.nz
+@ Date: 11 October 2021
+@ Brief: Combines and initialises game files
 */
 #include "system.h"
 #include "pio.h"
@@ -37,11 +37,13 @@ LFW25@UCLIVE.AC.NZ
 #define OBSTACLE_REFRESH (OBSTACLE_MOVING_RATE * NUM_ROWS)
 #define TIMEOUT_TIME (OBSTACLE_MOVING_RATE * 4)
 
+//Displays the score on pause or game over
+//Maybe move to its own module?
 void display_character (uint8_t score)
 {
     char display_score[4];
     
-    uint8toa(score, &display_score, true);
+    uint8toa(score, &display_score, true); //Convert score uint8_t to a string
     tinygl_text (display_score);
 }
 
@@ -50,15 +52,18 @@ int main(void)
 {
     uint8_t current_column = 0;
     //uint16_t counter = 1;
-    uint8_t score = 0; // OVERFLOW IN 4 MINUTES (MAX SCORE 240) 
+    uint8_t score = 0; //Overflow in 4 minutes (Max score = 240) 
     
-    srand(SEED); //STDLIB FUNCTION TO GENERATE PSUEDO RANDOM NUMBERS
+    srand(SEED); //stdlib function to generate pseudo random numbers for obstacle generation
 
-    int random_number = rand() % NUM_OBSTACLES; //CONVERTS RANDOM NUMBER TO [0,NUM_OBSTACLES-1] 
+    int random_number = rand() % NUM_OBSTACLES; //Converts random number to [0, NUM_OBSTACLES-1] 
 
     system_init ();
-    pacer_init (PACER_RATE); //REFRESH RATE OF 500HZ
     counter_init();
+    pacer_init (PACER_RATE); //Refresh rate of 500Hz
+
+    tinygl_init (PACER_RATE); //Setup for score display
+    tinygl_font_set (&font5x7_1);
     
     for (uint8_t i = 0; i < NUM_ROWS; i++) {
         if (i < NUM_COLS) {
@@ -79,66 +84,68 @@ int main(void)
     while (1)
     {
         pacer_wait ();
-        navswitch_update(); // POLL THE NAVSWITCH
-        tinygl_init (PACER_RATE); // SETUP FOR SCORE DISPLAY
-        tinygl_font_set (&font5x7_1);
+        navswitch_update(); //Poll the navswitch for player input
 
         if (counter % PACER_RATE == 0) {
             score++;
-        } // INCREMENTS SCORE EVERY SECOND
+        } //Increments score every second
 
         if (to_copy == false) {
             for (uint8_t i = 0; i < NUM_COLS; i++) {
                 obj_to_display[i] = obstacles[random_number][i];
             }
             to_copy = true;
-        } //COPIES OBJECT TO DISPLAY
+        } //Copies object to display
 
         
         if ((counter % OBSTACLE_MOVING_RATE) == 0) {
             move_object_left(obj_to_display);
-        } //WILL MOVE THE OBJECT LEFT AT APPROX 2.5HZ
+        } //Moves the object left
 
         if ((counter % OBSTACLE_REFRESH) == 0) {
             random_number = rand() % NUM_OBSTACLES;
             to_copy = false;
-        } //WHEN OBJECT IS OFF THE SCREEN, DISPLAY A NEW OBJECT
+        } //When object is off the screen, display a new object
 
 
         if (navswitch_push_event_p(NAVSWITCH_SOUTH)) {
 
             pause_flag = 1;
-            uint8_t previous_display = {obj_to_display[current_column] | runner[runner_status][current_column], current_column}; // SAVES THE PREVIOUS DISPLAY IN CASE OF OVERWRITE
+
+            //Save the previous display in case of overwrite
+            uint8_t previous_display = {obj_to_display[current_column] | runner[runner_status][current_column], current_column};
             while(pause_flag == 1) {
 
-                // DISPLAY PAUSE
+                //Display pause sign in top left
                 display_column(0x50, 0);
                 display_column(0x50, 1);
                 display_column(0x50, 2);
-                navswitch_update();
 
+                navswitch_update(); //Poll the navswitch for a resume command
+
+                //Display the score
                 tinygl_update ();
                 display_character(score);
                 
                 if (navswitch_push_event_p(NAVSWITCH_NORTH)) {
-                    // GAME IS RESUMED, DISPLAY OBJECTS AGAIN
+                    //Game is resumed, display objects and runner again
                     pause_flag = 0;
                     display_column(obj_to_display[current_column] | runner[runner_status][current_column], current_column);
                 }
             }
-        } //PAUSES THE GAME WHEN PRESSING THE NAVSWITCH LEFT, RESUME WHEN PUSHING RIGHT
+        } //Pauses the game when pressing nav-left, resume on nav-right
         
 
-        //DETERMINE RUNNER STATUS
+        //Determine runner status
         if (timeout == false) {
 
-            if (navswitch_down_p (NAVSWITCH_WEST)) { // NAV WEST = JUMP
+            if (navswitch_down_p (NAVSWITCH_WEST)) { //Nav-west = Jump
                 runner_status = 2;
-            } else if (navswitch_down_p (NAVSWITCH_EAST)) { // NAV EAST = CROUCH
+            } else if (navswitch_down_p (NAVSWITCH_EAST)) { //Nav-east = Crouch
                 runner_status = 1;
-            } else if (navswitch_down_p (NAVSWITCH_PUSH)) { // BUTTON PRESS = DOUBLE JUMP
+            } else if (navswitch_down_p (NAVSWITCH_PUSH)) { //Nav-push = Double jump
                 runner_status = 3;
-            } else { // DEFAULT
+            } else { //Default
                 runner_status = 0;
             }
         } else {
