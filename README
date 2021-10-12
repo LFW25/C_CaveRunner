@@ -1,6 +1,11 @@
-***********
-CAVE RUNNER
-***********
+    =/\                 /\=             ****************************** 
+    / \'._   (\_/)   _.'/ \
+   / .''._'--(o.o)--'_.''. \                        CAVE
+  /.' _/ |`'=/ " \='`| \_ `.\                      RUNNER
+ /` .' `\;-,'\___/',-;/` '. '\          
+/.-'       `\(-V-)/`       `-.\
+`            "   "            `         ******************************
+
 Welcome to Cave Runner, where you are a little man running through a cave.
 As you run you must dodge various obstacles!
 - Stalagtites will hang from the ceiling, requiring you to crouch underneath to avoid smacking your head!
@@ -18,6 +23,7 @@ CONTROLS:
 Crouch - Down on the navswitch
 Jump - Up on the navswitch
 Doublejump - Press the navswitch
+
 Pause - Left on the navswitch
 Resume - Right on the navswitch
 
@@ -51,6 +57,6 @@ TODO:
 
     - Add score display functionality to pause screen
 
-    - Split down into modules
+    - Split down into modules (Score display?)
 
-    - Get program to compile with tinygt, fonts and uintoa 
+    - Get program to compile with tinygl, fonts and uintoa 
