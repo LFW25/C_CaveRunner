@@ -16,7 +16,6 @@ lfw25@uclive.ac.nz
 #include "tinygl.h"
 #include "../../fonts/font5x7_1.h"
 #include "uint8toa.h"
-
 #include "navswitch.h"
 #include "objects.h"
 #include "pacer.h"
