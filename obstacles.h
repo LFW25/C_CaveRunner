@@ -1,3 +1,17 @@
+/*
+@ File: Obstacles.h
+@ Authors:
+George Fraser
+54510750
+ghf20@uclive.ac.nz
+
+Lily Williams
+42415299
+lfw25@uclive.ac.nz
+@ Date: 11 October 2021
+@ Brief: Defines the obstacles the runner must dodge
+*/
+
 #ifndef OBSTACLES_H
 #define OBSTACLES_H
 
