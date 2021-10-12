@@ -26,6 +26,6 @@ void counter_init(void);
 void counter_increment(void);
 
 //Avoids uint16 overflow
-static void counter_check_max(void);
+void counter_check_max(void);
 
 #endif //COUNTER_H

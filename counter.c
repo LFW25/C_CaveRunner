@@ -23,7 +23,7 @@ void counter_init(void)
 }
 
 //Avoids uint16_t overflow
-static void counter_check_max(void)
+void counter_check_max(void)
 {
     if (counter == UINT16_MAX) {
         counter = 0;
