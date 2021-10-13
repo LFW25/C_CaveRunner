@@ -11,10 +11,7 @@ lfw25@uclive.ac.nz
 @ Date: 11 October 2021
 @ Brief: Combines and initialises game files
 */
-#include "system.h"
-#include "pio.h"
-#include "tinygl.h"
-#include "../../fonts/font5x7_1.h"
+
 #include "uint8toa.h"
 #include "navswitch.h"
 #include "objects.h"
@@ -24,12 +21,12 @@ lfw25@uclive.ac.nz
 #include "collision.h"
 #include "counter.h"
 #include "scoredisplay.h"
+#include "game_initialise.h"
 
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
 
-#define SEED 2000
 #define PACER_RATE 500
 #define NUM_ROWS 7
 #define NUM_COLS 5
@@ -42,34 +39,13 @@ lfw25@uclive.ac.nz
 //Maybe move to its own module?
 
 int main(void)
-{
-    uint8_t current_column = 0;
-    //uint16_t counter = 1;
-    uint8_t score = 0; //Overflow in 4 minutes (Max score = 240) 
+{   
+    game_initialise_init(PACER_RATE, NUM_OBSTACLES);
+    game_initialise_set_display(NUM_ROWS);
     
-    srand(SEED); //stdlib function to generate pseudo random numbers for obstacle generation
 
-    int random_number = rand() % NUM_OBSTACLES; //Converts random number to [0, NUM_OBSTACLES-1] 
-
-    system_init ();
-    counter_init();
-    pacer_init (PACER_RATE); //Refresh rate of 500Hz
-
-    tinygl_init (PACER_RATE); //Setup for score display
-    tinygl_font_set (&font5x7_1);
     
-    for (uint8_t i = 0; i < NUM_ROWS; i++) {
-        if (i < NUM_COLS) {
-            pio_config_set(cols[i], PIO_OUTPUT_HIGH);
-        }
-        pio_config_set(rows[i], PIO_OUTPUT_HIGH);
-    }
-    bool to_copy = false;
-    bool timeout = false;
-    //static bool pause_flag = 0;
-
-    uint8_t obj_to_display[NUM_COLS]; //IF YOU CHECK OBJECTS.C AND OBJECTS.H ITS PRETTY CLEAR WHY WE NEED THIS
-    uint16_t timeout_counter = 0;
+    
     static uint8_t runner_status;
     static uint16_t obstacle_check = OBSTACLE_REFRESH-OBSTACLE_MOVING_RATE;
 
@@ -134,7 +110,7 @@ int main(void)
                 gameover_display(score);
             }
             obstacle_check = counter + OBSTACLE_REFRESH; 
-        } //Collision detection. Will break while loop but needs to display soimething instead?
+        }
 
         display_column(obj_to_display[current_column] | runner[runner_status][current_column], current_column);
     

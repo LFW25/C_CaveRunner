@@ -61,8 +61,11 @@ tinygl.o: ../../utils/tinygl.c ../../drivers/avr/system.h ../../drivers/display.
 scoredisplay.o: scoredisplay.c scoredisplay.h ../../drivers/display.h ../../utils/tinygl.h ../../utils/uint8toa.h ../../drivers/avr/system.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
+game_initialise.o: game_initialise.c game_initialise.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
 # Link: create ELF output file from object files.
-game.out: game.o system.o pio.o objects.o navswitch.o uint8toa.o timer.o pacer.o collision.o counter.o font.o display.o ledmat.o tinygl.o scoredisplay.o
+game.out: game.o system.o pio.o objects.o navswitch.o uint8toa.o timer.o pacer.o collision.o counter.o font.o display.o ledmat.o tinygl.o scoredisplay.o game_initialise.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 
