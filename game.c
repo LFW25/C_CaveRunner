@@ -23,6 +23,7 @@ lfw25@uclive.ac.nz
 #include "runner.h"
 #include "collision.h"
 #include "counter.h"
+#include "scoredisplay.h"
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -110,30 +111,9 @@ int main(void)
 
         if (navswitch_push_event_p(NAVSWITCH_SOUTH)) {
 
-            pause_flag = 1;
+            pause_display(score);
 
-            //Save the previous display in case of overwrite
-            uint8_t previous_display = {obj_to_display[current_column] | runner[runner_status][current_column], current_column};
-            while(pause_flag == 1) {
-
-                //Display pause sign in top left
-                display_column(0x50, 0);
-                display_column(0x50, 1);
-                display_column(0x50, 2);
-
-                navswitch_update(); //Poll the navswitch for a resume command
-
-                //Display the score
-                tinygl_update ();
-                display_character(score);
-                
-                if (navswitch_push_event_p(NAVSWITCH_NORTH)) {
-                    //Game is resumed, display objects and runner again
-                    pause_flag = 0;
-                    display_column(obj_to_display[current_column] | runner[runner_status][current_column], current_column);
-                }
-            }
-        } //Pauses the game when pressing nav-left, resume on nav-right
+        } //Pauses the game when pressing nav-left, will resume on nav-right
         
 
         //Determine runner status
@@ -158,8 +138,8 @@ int main(void)
         }
 
         if (counter % obstacle_check == 0) {
-            if (collision_check(runner_status, random_number)) {
-                break;
+            if (collision_check(runner_status, random_number) == true) {
+                gameover_display(score);
             }
             obstacle_check = OBSTACLE_REFRESH+OBSTACLE_MOVING_RATE; 
         } //Collision detection. Will break while loop but needs to display soimething instead?
