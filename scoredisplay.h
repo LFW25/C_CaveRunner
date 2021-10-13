@@ -14,11 +14,7 @@ lfw25@uclive.ac.nz
 #ifndef SCOREDISPLAY_H
 #define SCOREDISPLAY_H
 
-#include "system.h"
-#include "tinygl.h"
-#include "../../fonts/font5x7_1.h"
-#include "uint8toa.h"
-#include "navswitch.h"
+#include <stdint.h>
 
 //Displays the score on pause or game over
 //Maybe move to its own module?

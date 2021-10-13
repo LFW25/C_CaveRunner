@@ -40,14 +40,6 @@ lfw25@uclive.ac.nz
 
 //Displays the score on pause or game over
 //Maybe move to its own module?
-void display_character (uint8_t score)
-{
-    char display_score[4];
-    
-    uint8toa(score, &display_score, true); //Convert score uint8_t to a string
-    tinygl_text (display_score);
-}
-
 
 int main(void)
 {
@@ -74,7 +66,7 @@ int main(void)
     }
     bool to_copy = false;
     bool timeout = false;
-    static bool pause_flag = 0;
+    //static bool pause_flag = 0;
 
     uint8_t obj_to_display[NUM_COLS]; //IF YOU CHECK OBJECTS.C AND OBJECTS.H ITS PRETTY CLEAR WHY WE NEED THIS
     uint16_t timeout_counter = 0;
@@ -141,7 +133,7 @@ int main(void)
             if (collision_check(runner_status, random_number) == true) {
                 gameover_display(score);
             }
-            obstacle_check = OBSTACLE_REFRESH+OBSTACLE_MOVING_RATE; 
+            obstacle_check = counter + OBSTACLE_REFRESH; 
         } //Collision detection. Will break while loop but needs to display soimething instead?
 
         display_column(obj_to_display[current_column] | runner[runner_status][current_column], current_column);
@@ -153,12 +145,6 @@ int main(void)
             current_column = 0;
         }
         
-        counter_increment();
-        /*counter++;
-
-        if (counter == UINT16_MAX) {
-            counter = 1;
-        }
-        */           
+        counter_increment();         
     }
 }

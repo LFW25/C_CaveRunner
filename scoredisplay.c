@@ -12,9 +12,8 @@ lfw25@uclive.ac.nz
 @ Brief: Displays the score on the pause and game-over screens
 */
 
-#include "system.h"
+
 #include "tinygl.h"
-#include "../../fonts/font5x7_1.h"
 #include "uint8toa.h"
 #include "navswitch.h"
 #include "scoredisplay.h"
@@ -27,7 +26,7 @@ void display_character (uint8_t score)
 {
     char display_score[4];
     
-    uint8toa(score, &display_score, true); //Convert score uint8_t to a string
+    uint8toa(score, display_score, true); //Convert score uint8_t to a string
     tinygl_text (display_score);
 }
 
@@ -45,6 +44,8 @@ void pause_display(uint8_t score)
 
 void gameover_display(uint8_t score)
 {
-    tinygl_update ();
-    display_character(score);
+    while(1) {
+        tinygl_update ();
+        display_character(score);
+    }
 }

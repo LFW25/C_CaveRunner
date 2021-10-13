@@ -58,7 +58,7 @@ ledmat.o: ../../drivers/ledmat.c ../../drivers/avr/pio.h ../../drivers/avr/syste
 tinygl.o: ../../utils/tinygl.c ../../drivers/avr/system.h ../../drivers/display.h ../../utils/font.h ../../utils/tinygl.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-scoredisplay.o: scoredisplay.h scoredisplay.c ../../drivers/avr/system.h ../../drivers/display.h ../../utils/font.h ../../utils/tinygl.h ../../utils/uint8toa.h ../../drivers/avr/system.h
+scoredisplay.o: scoredisplay.c scoredisplay.h ../../drivers/display.h ../../utils/tinygl.h ../../utils/uint8toa.h ../../drivers/avr/system.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 # Link: create ELF output file from object files.
