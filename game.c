@@ -53,7 +53,7 @@ int main(void)
             score++;
         } //Increments score every second
 
-        if (to_copy = false) {
+        if (to_copy == false) {
             for (uint8_t i = 0; i < NUM_COLS; i++) {
                 obj_to_display[i] = obstacles[random_number][i];
             }
