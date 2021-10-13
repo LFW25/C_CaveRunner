@@ -16,6 +16,8 @@ lfw25@uclive.ac.nz
 #include "tinygl.h"
 #include "../../fonts/font5x7_1.h"
 #include "uint8toa.h"
+#include "navswitch.h"
+#include "scoredisplay.h"
 
 #include <stdbool.h>
 
@@ -27,4 +29,22 @@ void display_character (uint8_t score)
     
     uint8toa(score, &display_score, true); //Convert score uint8_t to a string
     tinygl_text (display_score);
+}
+
+void pause_display(uint8_t score)
+{
+    while(navswitch_push_event_p(NAVSWITCH_NORTH) == 0) {
+
+        navswitch_update(); //Poll the navswitch for a resume command
+
+        //Display the score
+        tinygl_update ();
+        display_character(score);
+    }
+}
+
+void gameover_display(uint8_t score)
+{
+    tinygl_update ();
+    display_character(score);
 }
