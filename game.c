@@ -43,11 +43,8 @@ int main(void)
     game_initialise_init(PACER_RATE, NUM_OBSTACLES);
     game_initialise_set_display(NUM_ROWS);
     
-
-    
-    
     static uint8_t runner_status;
-    static uint16_t obstacle_check = OBSTACLE_REFRESH-OBSTACLE_MOVING_RATE;
+    static uint16_t obstacle_check = OBSTACLE_REFRESH-(2*OBSTACLE_MOVING_RATE);
 
 
     while (1)
@@ -59,7 +56,7 @@ int main(void)
             score++;
         } //Increments score every second
 
-        if (to_copy == false) {
+        if (!to_copy) {
             for (uint8_t i = 0; i < NUM_COLS; i++) {
                 obj_to_display[i] = obstacles[random_number][i];
             }
@@ -89,10 +86,13 @@ int main(void)
 
             if (navswitch_down_p (NAVSWITCH_WEST)) { //Nav-west = Jump
                 runner_status = 2;
+                timeout = true;
             } else if (navswitch_down_p (NAVSWITCH_EAST)) { //Nav-east = Crouch
                 runner_status = 1;
+                timeout = true;
             } else if (navswitch_down_p (NAVSWITCH_PUSH)) { //Nav-push = Double jump
                 runner_status = 3;
+                timeout = true;
             } else { //Default
                 runner_status = 0;
             }
