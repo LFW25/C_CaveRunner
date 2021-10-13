@@ -1,5 +1,5 @@
 /*
-@ File: Scoredisplay.c
+@ File: Scoredisplay.h
 @ Authors:
 George Fraser
 54510750
@@ -17,7 +17,6 @@ lfw25@uclive.ac.nz
 #include <stdint.h>
 
 //Displays the score on pause or game over
-//Maybe move to its own module?
 char display_score[3];
 
 void display_character (uint8_t score);

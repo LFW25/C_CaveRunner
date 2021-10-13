@@ -1,5 +1,5 @@
 /*
-@ File: Objects.c
+@ File: Objects.h
 @ Authors:
 George Fraser
 54510750

@@ -35,9 +35,6 @@ lfw25@uclive.ac.nz
 #define OBSTACLE_REFRESH (OBSTACLE_MOVING_RATE * NUM_ROWS)
 #define TIMEOUT_TIME (OBSTACLE_MOVING_RATE * 4)
 
-//Displays the score on pause or game over
-//Maybe move to its own module?
-
 int main(void)
 {   
     game_initialise_init(PACER_RATE, NUM_OBSTACLES);

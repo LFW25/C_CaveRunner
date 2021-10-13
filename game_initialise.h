@@ -1,3 +1,17 @@
+/*
+@ File: Game_initialise.h
+@ Authors:
+George Fraser
+54510750
+ghf20@uclive.ac.nz
+
+Lily Williams
+42415299
+lfw25@uclive.ac.nz
+@ Date: 13 October 2021
+@ Brief: Initialises all the necessary modules for the game to run
+*/
+
 #ifndef GAME_INITIALISE_H
 #define GAME_INITIALISE_H
 

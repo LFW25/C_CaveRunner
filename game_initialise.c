@@ -1,3 +1,16 @@
+/*
+@ File: Game_initialise.c
+@ Authors:
+George Fraser
+54510750
+ghf20@uclive.ac.nz
+
+Lily Williams
+42415299
+lfw25@uclive.ac.nz
+@ Date: 13 October 2021
+@ Brief: Initialises all the necessary modules for the game to run
+*/
 #include "system.h"
 #include "counter.h"
 #include "../../fonts/font3x5_1.h"
@@ -7,7 +20,7 @@
 #include "pacer.h"
 #include "objects.h"
 
-
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
 
