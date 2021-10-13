@@ -31,7 +31,7 @@ lfw25@uclive.ac.nz
 #define NUM_ROWS 7
 #define NUM_COLS 5
 #define NUM_OBSTACLES (sizeof(obstacles)/sizeof(obstacles[0]))
-#define OBSTACLE_MOVING_RATE 75
+#define OBSTACLE_MOVING_RATE 150
 #define OBSTACLE_REFRESH (OBSTACLE_MOVING_RATE * NUM_ROWS)
 #define TIMEOUT_TIME (OBSTACLE_MOVING_RATE * 4)
 

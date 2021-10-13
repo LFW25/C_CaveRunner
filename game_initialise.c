@@ -1,6 +1,6 @@
 #include "system.h"
 #include "counter.h"
-#include "../../fonts/font5x7_1.h"
+#include "../../fonts/font3x5_1.h"
 #include "tinygl.h"
 #include "pio.h"
 #include "game_initialise.h"
@@ -19,7 +19,9 @@ void game_initialise_init(uint16_t pacer_rate, uint16_t num_obstacles)
     counter_init();
     pacer_init (pacer_rate); //Refresh rate of 500Hz
     tinygl_init (pacer_rate); //Setup for score display
-    tinygl_font_set (&font5x7_1);
+    tinygl_font_set (&font3x5_1);
+    tinygl_text_mode_set (TINYGL_TEXT_MODE_STEP);
+    tinygl_text_dir_set (TINYGL_TEXT_DIR_ROTATE);
     srand(SEED);
     game_initialise_random(num_obstacles);
     game_initialse_set_vars();
