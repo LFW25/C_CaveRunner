@@ -23,10 +23,8 @@ lfw25@uclive.ac.nz
 //Displays the score on pause or game over
 //Maybe move to its own module?
 void display_character (uint8_t score)
-{
-    char display_score[4];
-    
-    uint8toa(score, display_score, true); //Convert score uint8_t to a string
+{   
+    uint8toa(score, display_score, false); //Convert score uint8_t to a string
     tinygl_text (display_score);
 }
 

@@ -18,6 +18,8 @@ lfw25@uclive.ac.nz
 
 //Displays the score on pause or game over
 //Maybe move to its own module?
+char display_score[2];
+
 void display_character (uint8_t score);
 
 void pause_display(uint8_t score);
