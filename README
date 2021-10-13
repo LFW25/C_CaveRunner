@@ -50,9 +50,9 @@ The use the git push command to copy the changes to the remote git server
 git push
 
 
-13/10/21 14:29
+13/10/21 15:31
 
 TODO:
     - Split down into modules (Score display?)
 
-    - fix bugs in collision.c/game.c
+    - fix scoring not incrementing
