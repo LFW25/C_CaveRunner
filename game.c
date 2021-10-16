@@ -31,18 +31,14 @@ lfw25@uclive.ac.nz
 #define NUM_ROWS 7
 #define NUM_COLS 5
 #define NUM_OBSTACLES (sizeof(obstacles)/sizeof(obstacles[0]))
-#define OBSTACLE_MOVING_RATE 150
-#define OBSTACLE_REFRESH (OBSTACLE_MOVING_RATE * NUM_ROWS)
-#define TIMEOUT_TIME (OBSTACLE_MOVING_RATE * 4)
 
 int main(void)
 {   
+    
     game_initialise_init(PACER_RATE, NUM_OBSTACLES);
     game_initialise_set_display(NUM_ROWS);
     
     static uint8_t runner_status;
-    static uint16_t obstacle_check = OBSTACLE_REFRESH-(2*OBSTACLE_MOVING_RATE);
-
 
     while (1)
     {
@@ -61,13 +57,14 @@ int main(void)
         } //Copies object to display
 
         
-        if ((counter % OBSTACLE_MOVING_RATE) == 0) {
+        if ((counter % obstacle_moving_rate) == 0) {
             move_object_left(obj_to_display);
         } //Moves the object left
 
-        if ((counter % OBSTACLE_REFRESH) == 0) {
+        if ((counter % obstacle_refresh) == 0) {
             random_number = rand() % NUM_OBSTACLES;
             to_copy = false;
+            obstacle_moving_rate--;
         } //When object is off the screen, display a new object
 
 
@@ -94,7 +91,7 @@ int main(void)
                 runner_status = 0;
             }
         } else {
-            if (timeout_counter >= TIMEOUT_TIME) {
+            if (timeout_counter >= timeout_time) {
                 timeout = false;
                 timeout_counter = 0;
             } else {
@@ -106,7 +103,7 @@ int main(void)
             if (collision_check(runner_status, random_number) == true) {
                 gameover_display(score);
             }
-            obstacle_check = counter + OBSTACLE_REFRESH; 
+            obstacle_check = counter + obstacle_refresh; 
         }
 
         display_column(obj_to_display[current_column] | runner[runner_status][current_column], current_column);

@@ -48,6 +48,10 @@ void game_initialse_set_vars(void)
     to_copy = false;
     timeout = false;
     timeout_counter = 0;
+    obstacle_moving_rate  = 125;
+    obstacle_refresh = (obstacle_moving_rate * 5);
+    timeout_time = (obstacle_moving_rate * 4);
+    obstacle_check = obstacle_refresh-(2*obstacle_moving_rate); 
 }
 
 void game_initialise_random(uint16_t num_obstacles)
