@@ -37,8 +37,6 @@ int main(void)
     
     game_initialise_init(PACER_RATE, NUM_OBSTACLES);
     game_initialise_set_display(NUM_ROWS);
-    
-    static uint8_t runner_status;
 
     while (1)
     {
@@ -74,9 +72,9 @@ int main(void)
 
         } //Pauses the game when pressing nav-left, will resume on nav-right
         
-
+        take_input();
         //Determine runner status
-        if (timeout == false) {
+        /* if (timeout == false) {
 
             if (navswitch_down_p (NAVSWITCH_WEST)) { //Nav-west = Jump
                 runner_status = 2;
@@ -97,7 +95,7 @@ int main(void)
             } else {
                 timeout_counter++;
             }
-        }
+        } */
 
         if (counter % obstacle_check == 0) {
             if (collision_check(runner_status, random_number) == true) {

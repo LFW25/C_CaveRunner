@@ -40,4 +40,6 @@ void display_column(uint8_t row_pattern, uint8_t current_column);
 
 void move_object_left(uint8_t* obstacle);
 
+void take_input(void);
+
 #endif //OBJECTS_H

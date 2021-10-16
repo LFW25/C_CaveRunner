@@ -14,6 +14,8 @@ lfw25@uclive.ac.nz
 #include "system.h"
 #include "pio.h"
 #include "objects.h"
+#include "game_initialise.h"
+#include "navswitch.h"
 
 #define NUM_ROWS 7
 #define NUM_COLS 5
@@ -41,5 +43,31 @@ void move_object_left(uint8_t* obstacle)
 {
     for (uint8_t i = 0; i < NUM_COLS; i++) {
         obstacle[i] = obstacle[i] << 1;
+    }
+}
+
+void take_input(void)
+{
+    if (timeout == false) {
+
+        if (navswitch_down_p (NAVSWITCH_WEST)) { //Nav-west = Jump
+            runner_status = 2;
+            timeout = true;
+        } else if (navswitch_down_p (NAVSWITCH_EAST)) { //Nav-east = Crouch
+            runner_status = 1;
+            timeout = true;
+        } else if (navswitch_down_p (NAVSWITCH_PUSH)) { //Nav-push = Double jump
+            runner_status = 3;
+            timeout = true;
+        } else { //Default
+            runner_status = 0;
+        }
+    } else {
+        if (timeout_counter >= timeout_time) {
+            timeout = false;
+            timeout_counter = 0;
+        } else {
+            timeout_counter++;
+        }
     }
 }
