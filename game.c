@@ -51,10 +51,7 @@ int main(void)
             to_copy = true;
         } //Copies object to display
 
-        
-        if ((counter % obstacle_moving_rate) == 0) {
-            move_object_left(obj_to_display);
-        } //Moves the object left
+        move_object_left(obj_to_display);
 
         if ((counter % obstacle_refresh) == 0) {
             random_number = rand() % NUM_OBSTACLES;
@@ -73,12 +70,7 @@ int main(void)
 
         display_column(obj_to_display[current_column] | runner[runner_status][current_column], current_column);
     
-        current_column++;
-    
-        if (current_column >= (NUM_COLS))
-        {
-            current_column = 0;
-        }
+        column_increment();
         
         counter_increment();         
     }

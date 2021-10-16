@@ -16,6 +16,8 @@ lfw25@uclive.ac.nz
 #include "objects.h"
 #include "game_initialise.h"
 #include "navswitch.h"
+#include "scoredisplay.h"
+#include "counter.h"
 
 #define NUM_ROWS 7
 #define NUM_COLS 5
@@ -41,13 +43,21 @@ void display_column(uint8_t row_pattern, uint8_t current_column)
 //This function left-shifts the obstacle bitmap
 void move_object_left(uint8_t* obstacle)
 {
-    for (uint8_t i = 0; i < NUM_COLS; i++) {
-        obstacle[i] = obstacle[i] << 1;
+    if ((counter % obstacle_moving_rate) == 0) {
+        for (uint8_t i = 0; i < NUM_COLS; i++) {
+            obstacle[i] = obstacle[i] << 1;
+        }
     }
 }
 
 void take_input(void)
 {
+    if (navswitch_push_event_p(NAVSWITCH_SOUTH)) {
+
+            pause_display(score);
+
+    }
+
     if (timeout == false) {
 
         if (navswitch_down_p (NAVSWITCH_WEST)) { //Nav-west = Jump
@@ -69,5 +79,15 @@ void take_input(void)
         } else {
             timeout_counter++;
         }
+    }
+}
+
+void column_increment(void)
+{
+    current_column++;
+    
+    if (current_column >= (NUM_COLS))
+    {
+        current_column = 0;
     }
 }

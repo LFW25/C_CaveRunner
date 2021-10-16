@@ -42,4 +42,6 @@ void move_object_left(uint8_t* obstacle);
 
 void take_input(void);
 
+void column_increment(void);
+
 #endif //OBJECTS_H

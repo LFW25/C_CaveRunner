@@ -14,6 +14,7 @@ lfw25@uclive.ac.nz
 
 
 #include "tinygl.h"
+#include "pacer.h"
 #include "uint8toa.h"
 #include "navswitch.h"
 #include "scoredisplay.h"
@@ -45,10 +46,30 @@ void pause_display(uint8_t score)
 //Displays the score on a gameover
 void gameover_display(uint8_t score)
 {
+    uint32_t task_counter = 1;
     while(1) {
-        tinygl_update ();
-        display_character(score);
+        while(1) {
+            pacer_wait();
+            tinygl_update ();
+            display_character(score);
+            task_counter++;
+            if (task_counter % 300 == 0) {
+                break;
+            }
+        }
+        
+        while(1) {
+            pacer_wait();
+            tinygl_update();
+            tinygl_clear();
+            task_counter++;
+            if (task_counter % 300 == 0) {
+                break;
+            }
+        }
+        
     }
+    
 }
 
 void score_increment(uint16_t pacer)

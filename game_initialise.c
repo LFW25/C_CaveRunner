@@ -23,8 +23,7 @@ lfw25@uclive.ac.nz
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
-
-#define SEED 2000
+#include <time.h>
 
 void game_initialise_init(uint16_t pacer_rate, uint16_t num_obstacles)
 {
@@ -35,7 +34,7 @@ void game_initialise_init(uint16_t pacer_rate, uint16_t num_obstacles)
     tinygl_font_set (&font3x5_1);
     tinygl_text_mode_set (TINYGL_TEXT_MODE_STEP);
     tinygl_text_dir_set (TINYGL_TEXT_DIR_ROTATE);
-    srand(SEED);
+    srand(time(NULL));
     game_initialise_random(num_obstacles);
     game_initialse_set_vars();
     

@@ -39,6 +39,8 @@ uint16_t timeout_time;
 
 uint16_t obstacle_check;
 
+uint8_t runner_status;
+
 void game_initialise_init(uint16_t pacer_rate, uint16_t num_obstacles);
 
 void game_initialse_set_vars(void);
