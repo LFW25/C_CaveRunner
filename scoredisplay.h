@@ -25,4 +25,6 @@ void pause_display(uint8_t score);
 
 void gameover_display(uint8_t score);
 
+void score_increment(uint16_t pacer);
+
 #endif

@@ -17,6 +17,8 @@ lfw25@uclive.ac.nz
 #include "uint8toa.h"
 #include "navswitch.h"
 #include "scoredisplay.h"
+#include "game_initialise.h"
+#include "counter.h"
 
 #include <stdbool.h>
 
@@ -47,4 +49,11 @@ void gameover_display(uint8_t score)
         tinygl_update ();
         display_character(score);
     }
+}
+
+void score_increment(uint16_t pacer)
+{
+    if (counter % pacer == 0) {
+        score++;
+    } 
 }

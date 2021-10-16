@@ -34,7 +34,6 @@ lfw25@uclive.ac.nz
 
 int main(void)
 {   
-    
     game_initialise_init(PACER_RATE, NUM_OBSTACLES);
     game_initialise_set_display(NUM_ROWS);
 
@@ -43,9 +42,7 @@ int main(void)
         pacer_wait ();
         navswitch_update(); //Poll the navswitch for player input
 
-        if (counter % PACER_RATE == 0) {
-            score++;
-        } //Increments score every second
+        score_increment(PACER_RATE); //Increments score every second
 
         if (to_copy == false) {
             for (uint8_t i = 0; i < NUM_COLS; i++) {
@@ -64,38 +61,8 @@ int main(void)
             to_copy = false;
             obstacle_moving_rate--;
         } //When object is off the screen, display a new object
-
-
-        if (navswitch_push_event_p(NAVSWITCH_SOUTH)) {
-
-            pause_display(score);
-
-        } //Pauses the game when pressing nav-left, will resume on nav-right
         
         take_input();
-        //Determine runner status
-        /* if (timeout == false) {
-
-            if (navswitch_down_p (NAVSWITCH_WEST)) { //Nav-west = Jump
-                runner_status = 2;
-                timeout = true;
-            } else if (navswitch_down_p (NAVSWITCH_EAST)) { //Nav-east = Crouch
-                runner_status = 1;
-                timeout = true;
-            } else if (navswitch_down_p (NAVSWITCH_PUSH)) { //Nav-push = Double jump
-                runner_status = 3;
-                timeout = true;
-            } else { //Default
-                runner_status = 0;
-            }
-        } else {
-            if (timeout_counter >= timeout_time) {
-                timeout = false;
-                timeout_counter = 0;
-            } else {
-                timeout_counter++;
-            }
-        } */
 
         if (counter % obstacle_check == 0) {
             if (collision_check(runner_status, random_number) == true) {
