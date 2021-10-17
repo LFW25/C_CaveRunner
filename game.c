@@ -12,7 +12,6 @@ lfw25@uclive.ac.nz
 @ Brief: Combines and initialises game files
 */
 
-#include "uint8toa.h"
 #include "navswitch.h"
 #include "objects.h"
 #include "pacer.h"
