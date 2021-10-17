@@ -15,11 +15,13 @@ As you run you must dodge various obstacles:
 - Boulders will prevent you from continuing your caving dreams, you'll have to doublejump to get past.
 - Tunnels will force you to squeeze through the middle, and only a jump will work.
 
-But be careful, once you've moved, you're committed to that move for at least 3 pixels!
-If you collide with any obstacles, that's game over! The game will end and you will see your score.
+But be careful, once you've moved, you're committed to that move for at least 4 pixels!
+If you collide with any obstacles, that's game over! The game will end and you will see your score flashing.
 
 This game is played in landscape mode to give you the advantage of more reaction time.
 The USB connector is on the right-hand side.
+
+To restart the game, press and hold the button and press the reset button.
 
 CONTROLS:
 Crouch - Down on the navswitch
@@ -28,31 +30,3 @@ Doublejump - Press the navswitch
 
 Pause - Left on the navswitch
 Resume - Right on the navswitch
-
-
-
-
-
-
-
-Use this directory for your final game and its module(s).  Only the
-files in this directory will be marked.
-
-Ensure you use the git add command to add your files to the git
-repository.  For example,
-
-git add module.c
-
-Then use the git commit command to add the file contents
-
-git commit -m "Added file" module.c
-
-The use the git push command to copy the changes to the remote git server
-
-git push
-
-
-13/10/21 17:27
-
-TODO:
-    - Flash gameover score
