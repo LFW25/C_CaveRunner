@@ -25,6 +25,8 @@ lfw25@uclive.ac.nz
 #include <stdlib.h>
 #include <time.h>
 
+void game_initialise_set_vars(void);
+
 //Initialises all the systems
 void game_initialise_init(uint16_t pacer_rate, uint16_t num_obstacles)
 {
@@ -50,7 +52,7 @@ void game_initialise_set_vars(void)
     timeout = false;
     timeout_counter = 0;
     obstacle_moving_rate  = 125;
-    obstacle_refresh = (obstacle_moving_rate * 5);
+    obstacle_refresh = (obstacle_moving_rate * 6);
     timeout_time = (obstacle_moving_rate * 4);
     obstacle_check = obstacle_refresh-(2*obstacle_moving_rate); 
 }
