@@ -25,6 +25,7 @@ lfw25@uclive.ac.nz
 #include <stdlib.h>
 #include <time.h>
 
+//Initialises all the systems
 void game_initialise_init(uint16_t pacer_rate, uint16_t num_obstacles)
 {
     system_init ();
@@ -36,11 +37,12 @@ void game_initialise_init(uint16_t pacer_rate, uint16_t num_obstacles)
     tinygl_text_dir_set (TINYGL_TEXT_DIR_ROTATE);
     srand(time(NULL));
     game_initialise_random(num_obstacles);
-    game_initialse_set_vars();
+    game_initialise_set_vars();
     
 }
 
-void game_initialse_set_vars(void)
+//Sets all the game variables
+void game_initialise_set_vars(void)
 {
     score = 0;
     current_column = 0;
@@ -53,11 +55,13 @@ void game_initialse_set_vars(void)
     obstacle_check = obstacle_refresh-(2*obstacle_moving_rate); 
 }
 
+//Initialises a pseudo-random obstacle to begin
 void game_initialise_random(uint16_t num_obstacles)
 {
     random_number = rand() % num_obstacles;
 }
 
+//Initialises the LED PIO
 void game_initialise_set_display(uint16_t num_rows)
 {
     for (uint8_t i = 0; i < num_rows; i++) {

@@ -37,12 +37,17 @@ static const pio_t cols[] =
     LEDMAT_COL4_PIO, LEDMAT_COL5_PIO
 };
 
+//This function displays the bitmap on the current column
 void display_column(uint8_t row_pattern, uint8_t current_column);
 
+//This function left-shifts the obstacle bitmap
 void move_object_left(uint8_t* obstacle);
 
+// Takes input from the navswitch
 void take_input(void);
 
+//Moves the marker denoting the current column left by one
+//Checks if the obstacle has moved off-screen
 void column_increment(void);
 
 #endif //OBJECTS_H

@@ -23,14 +23,15 @@ lfw25@uclive.ac.nz
 
 #include <stdbool.h>
 
-//Displays the score
+//Displays the score using tiny_gl
 void display_character (uint8_t score)
 {   
     uint8toa(score, display_score, false); //Convert score uint8_t to a string
     tinygl_text (display_score);
 }
 
-//Displays the score on a game pause and resumed when nav-north is pressed
+//Controls score display on a game pause
+//Resumes game when nav-north is pressed
 void pause_display(uint8_t score)
 {
     while(navswitch_push_event_p(NAVSWITCH_NORTH) == 0) {
@@ -43,7 +44,7 @@ void pause_display(uint8_t score)
     }
 }
 
-//Displays the score on a gameover
+//Flashes the score on a gameover
 void gameover_display(uint8_t score)
 {
     uint32_t task_counter = 1;
@@ -72,6 +73,7 @@ void gameover_display(uint8_t score)
     
 }
 
+//Increments the score every second
 void score_increment(uint16_t pacer)
 {
     if (counter % pacer == 0) {

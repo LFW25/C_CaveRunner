@@ -50,6 +50,7 @@ void move_object_left(uint8_t* obstacle)
     }
 }
 
+//Takes input from the navswitch
 void take_input(void)
 {
     if (navswitch_push_event_p(NAVSWITCH_SOUTH)) {
@@ -82,6 +83,8 @@ void take_input(void)
     }
 }
 
+//Moves the marker denoting the current column left by one
+//Checks if the obstacle has moved off-screen
 void column_increment(void)
 {
     current_column++;

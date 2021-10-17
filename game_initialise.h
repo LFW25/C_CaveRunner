@@ -41,12 +41,16 @@ uint16_t obstacle_check;
 
 uint8_t runner_status;
 
+//Initialises all the systems
 void game_initialise_init(uint16_t pacer_rate, uint16_t num_obstacles);
 
+//Sets all the game variables
 void game_initialse_set_vars(void);
 
+//Initialises a pseudo-random obstacle to begin
 void game_initialise_random(uint16_t num_obstacles);
 
+//Initialises the LED PIO
 void game_initialise_set_display(uint16_t num_rows);
 
 #endif

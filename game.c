@@ -65,7 +65,7 @@ int main(void)
                 gameover_display(score);
             }
             obstacle_check = counter + obstacle_refresh; 
-        }
+        } //Checks for a collision between runner and obstacle
 
         display_column(obj_to_display[current_column] | runner[runner_status][current_column], current_column);
     
