@@ -25,7 +25,6 @@ lfw25@uclive.ac.nz
 #include <stdlib.h>
 #include <time.h>
 
-void game_initialise_set_vars(void);
 
 //Initialises all the systems
 void game_initialise_init(uint16_t pacer_rate, uint16_t num_obstacles)
