@@ -1,6 +1,6 @@
 # File:   Makefile
-# Author: M. P. Hayes, UCECE
-# Date:   12 Sep 2010
+# Author: George Fraser & Lily Williams
+# Date:   17 Oct 2021
 # Descr:  Makefile for game
 
 # Definitions.
