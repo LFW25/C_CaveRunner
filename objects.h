@@ -14,6 +14,7 @@ lfw25@uclive.ac.nz
 #ifndef OBJECTS_H
 #define OBJECTS_H
 
+#include <stdbool.h>
 #include <stdint.h>
 #include "system.h"
 #include "pio.h"
