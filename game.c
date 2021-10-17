@@ -44,7 +44,7 @@ int main(void)
 
         score_increment(PACER_RATE); //Increments score every second
 
-        if (to_copy == false) {
+        if (!to_copy) {
             for (uint8_t i = 0; i < NUM_COLS; i++) {
                 obj_to_display[i] = obstacles[random_number][i];
             }
@@ -62,7 +62,7 @@ int main(void)
         take_input();
 
         if (counter % obstacle_check == 0) {
-            if (collision_check(runner_status, random_number) == true) {
+            if (collision_check(runner_status, random_number)) {
                 gameover_display(score);
             }
             obstacle_check = counter + obstacle_refresh; 
