@@ -42,6 +42,7 @@ void pause_display(uint8_t score)
         tinygl_update ();
         display_character(score);
     }
+    tinygl_clear();
 }
 
 //Flashes the score on a gameover
